@@ -1,9 +1,63 @@
-from sqlalchemy import create_engine, String, Column
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 import urllib.parse
+import configparser
+import os.path
 
-url = "test"
-url_correct = urllib.parse.quote_plus(url)
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
-engine = create_engine(url_correct)
+# If modifying these scopes, delete the file token.json.
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+
+config = configparser.ConfigParser()
+config.read('example.ini')
+API_KEY = config['DEFAULT']['API_KEY']
+SPREADSHEET_ID = config['DEFAULT']['SPREADSHEET_ID']
+RANGE = "Sheet1!A1:B"
+SPREADSHEET_URL = config['DEFAULT']['SPREADSHEET_URL']
+url_correct = urllib.parse.quote_plus(SPREADSHEET_URL)
+
+
+def main():
+  """Shows basic usage of the Sheets API.
+  Prints values from a sample spreadsheet.
+  """
+  creds = None
+  # The file token.json stores the user's access and refresh tokens, and is
+  # created automatically when the authorization flow completes for the first
+  # time.
+  if os.path.exists("token.json"):
+    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+  # If there are no (valid) credentials available, let the user log in.
+  if not creds or not creds.valid:
+    if creds and creds.expired and creds.refresh_token:
+      creds.refresh(Request())
+    else:
+      flow = InstalledAppFlow.from_client_secrets_file(
+          "credentials.json", SCOPES
+      )
+      creds = flow.run_local_server(port=0)
+    # Save the credentials for the next run
+    with open("token.json", "w") as token:
+      token.write(creds.to_json())
+
+  try:
+    service = build("sheets", "v4", credentials=creds)
+
+    # Call the Sheets API
+    sheet = service.spreadsheets()
+    result = (
+        sheet.values()
+        .get(spreadsheetId=SPREADSHEET_ID, range=RANGE)
+        .execute()
+    )
+    values = result.get("values", [])
+
+    print(values)
+  except HttpError as err:
+    print(err)
+
+
+
