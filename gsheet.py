@@ -1,7 +1,5 @@
-import urllib.parse
 import configparser
 import os.path
-import gspread
 import pandas as pd
 from json import loads, dumps
 
@@ -11,18 +9,12 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-
-`config = configparser.ConfigParser()
+config = configparser.ConfigParser()
 config.read('example.ini')
-API_KEY = config['DEFAULT']['API_KEY']`
+
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = config['DEFAULT']['SPREADSHEET_ID']
-RANGE = "Sheet1!A1:Y"
-SPREADSHEET_URL = config['DEFAULT']['SPREADSHEET_URL']
-url_correct = urllib.parse.quote_plus(SPREADSHEET_URL)
-
-
+RANGE = "Sheet1!A2:Y"
 
 
 def authentication():
@@ -77,10 +69,20 @@ def get_row(search):
     except HttpError as err:
         print(err)
 
-print(get_row("43266"))
 
-"""client = gspread.authorize(authentication())
-sheet = client.open_by_url(SPREADSHEET_URL)
-sheet_instance = sheet.get_worksheet(0)
-record = sheet_instance.get_all_records()
-record"""
+def get_id(search):
+    creds = authentication()
+    try:
+        service = build("sheets", "v4", credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = (sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute())
+        values = result.get("values", [])
+        df = pd.DataFrame(values[1:], columns=values[0])
+        filtered_df = df.loc[df['internal_id'].str.contains(search)]
+        changed = filtered_df.to_json(orient="records")
+        parsed = loads(changed)
+        return parsed
+    except HttpError as err:
+        print(err)

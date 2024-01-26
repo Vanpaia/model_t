@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='main.css')}}">
+{% endblock %}
+
+{% block app_content %}
+    <h2><b>{{ legislation_base["title"] }}</b></h2>
+    <h2><b>{{ legislation_base["native_title"] }}</b></h2>
+    <p><i>Date of introduction: {{ legislation_base["date_first_introduction"] }}</i></p>
+    <div class="line_box" style="margin: 40px 0 40px 0;">
+        <div class="text_circle done">
+            <div class="circle">
+                <h4>Introduction</h4>
+                <p>16. 1. 2020</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
+        </div>
+        <div class="text_circle done">
+            <div class="circle">
+                <h4>First Reading</h4>
+                <p>16. 1. 2020</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
+        </div>
+        <div class="text_circle">
+            <div class="circle">
+                <h4>Second Reading</h4>
+                <p>16. 1. 2020</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"></a>
+        </div>
+        <div class="text_circle">
+            <div class="circle">
+                <h4>Publication</h4>
+                <p>16. 1. 2020</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"></a>
+        </div>
+        <div class="text_circle">
+            <div class="circle">
+                <h4>Entry into force</h4>
+                <p>16. 1. 2020</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"></a>
+        </div>
+    </div>
+    <h3>Content:</h3>
+    <p>{{ legislation_base["description"] }}</p>
+    <h3>Likelihood:</h3>
+    <p>{{ legislation_base["development"] }}</p>
+    <p><a href="{{ legislation_base["relevant_links"] }}">Source Link</a></p>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+        <script>
+            $(function () {
+              $('[data-toggle="popover"]').popover();
+            });
+        </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='report.css')}}">
+{% endblock %}
+
+{% block app_content %}
+    <h2><b>{{ legislation["title"] }}</b></h2>
+    <p><i>Date of introduction: {{ legislation["date of first introduction "] }}</i></p>
+    <h3>Content:</h3>
+    <p>{{ legislation["initiative_description"] }}</p>
+    <h3>Likelihood: {{ likelihood }}</h3>
+    <p>{{ legislation["likelihood_factors"] }}</p>
+    <p><a href="{{ legislation["relevant_links"] }}">Source Link</a></p>
+
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+{% endblock %}

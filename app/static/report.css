@@ -1,0 +1,25 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+    color: #750b81!important;
+    font-size: 14px;
+}
+
+h2 {
+    color: #c00000!important;
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 11px;
+    text-align: justify;
+}
