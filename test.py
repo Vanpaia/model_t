@@ -14,7 +14,7 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
-`config = configparser.ConfigParser()
+config = configparser.ConfigParser()
 config.read('example.ini')
 API_KEY = config['DEFAULT']['API_KEY']`
 SPREADSHEET_ID = config['DEFAULT']['SPREADSHEET_ID']
