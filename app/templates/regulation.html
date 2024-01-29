@@ -12,24 +12,30 @@
     <h2><b>{{ entry_base["native_title"] }}</b></h2>
     <p><i>Date of introduction: {{ entry_base["date_first_introduction"] }}</i></p>
     <div class="line_box" style="margin: 40px 0 40px 0;">
-        {% for steps in entry_history %}
+        <div class="text_circle done">
+            <div class="circle">
+                <h4>Approved</h4>
+                <p>{{ entry_base["date_first_introduction"] }}</p>
+            </div>
+            <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
+        </div>
+        {% if enforcement["date"] < enforcement["now"] %}
             <div class="text_circle done">
                 <div class="circle">
-                    <h4>{{ steps["step"] }}</h4>
-                    <p>{{ steps["date"] }}</p>
+                    <h4>Entry into force</h4>
+                    <p>{{ enforcement["date"] }}</p>
                 </div>
                 <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
             </div>
-        {% endfor %}
-        {% for steps in range(5-entry_history|length) %}
+        {% else %}
             <div class="text_circle">
                 <div class="circle">
-                    <h4>Remaining Step</h4>
-                    <p>Unknown</p>
+                    <h4>Entry into force</h4>
+                    <p>{{ enforcement["date"] }}</p>
                 </div>
                 <a href="javascript:void(0)" class="tvar"></a>
             </div>
-        {% endfor %}
+        {% endif %}
     </div>
     <h3>Content:</h3>
     <p>{{ entry_base["description"] }}</p>

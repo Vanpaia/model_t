@@ -1,8 +1,11 @@
+import datetime
+import calendar
 from flask import render_template, url_for, redirect, jsonify, request
 #from flask_weasyprint import HTML
-from gsheet import authentication, get_row, get_all, get_id
+from gsheet import authentication, get_row, get_all, get_id, entry_update
 from app.main import bp
 import app
+
 
 @bp.route('/')
 @bp.route('/index')
@@ -11,49 +14,34 @@ def index():
 
 @bp.route('/legs/<id>')
 def legs(id):
-    history = get_id(str(id))
-    legislation_base = history[0]
-    legislation_history = []
-    for x in history:
-        if len(x["development"]) > 0:
-            legislation_history.append({"date": x["date_development"], "development":x["development"], "step":x["legislative_step"]})
-        if len(x["related_id"]) > 0:
-            legislation_base["related_id"] = x["related_id"]
-        if len(x["document_id"]) > 0:
-            legislation_base["document_id"] = x["document_id"]
-        if len(x["native_title"]) > 0:
-            legislation_base["native_title"] = x["native_title"]
-        if len(x["title"]) > 0:
-            legislation_base["title"] = x["title"]
-        if len(x["description"]) > 0:
-            legislation_base["description"] = x["description"]
-        if len(x["initiative_type"]) > 0:
-            legislation_base["initiative_type"] = x["initiative_type"]
-        if len(x["legally_binding"]) > 0:
-            legislation_base["legally_binding"] = x["legally_binding"]
-        if len(x["issue"]) > 0:
-            legislation_base["issue"] = x["issue"]
-        if len(x["sub_issue"]) > 0:
-            legislation_base["sub_issue"] = x["sub_issue"]
-        if len(x["likelihood"]) > 0:
-            legislation_base["likelihood"] = x["likelihood"]
-        if len(x["impact_score"]) > 0:
-            legislation_base["impact_score"] = x["impact_score"]
-        if len(x["impact"]) > 0:
-            legislation_base["impact"] = x["impact"]
-        if len(x["adoption_year"]) > 0:
-            legislation_base["adoption_year"] = x["adoption_year"]
-        if len(x["adoption_month"]) > 0:
-            legislation_base["adoption_month"] = x["adoption_month"]
-        if len(x["enforcement_year"]) > 0:
-            legislation_base["enforcement_year"] = x["enforcement_year"]
-        if len(x["enforcement_month"]) > 0:
-            legislation_base["enforcement_month"] = x["enforcement_month"]
-        if len(x["relevant_links"]) > 0:
-            legislation_base["relevant_links"] = x["relevant_links"]
-        if x["date_first_introduction"] is not None:
-            legislation_base["date_first_introduction"] = x["date_first_introduction"]
-    return render_template('legislation.html', legislation_base = legislation_base, legislation_history=legislation_history)
+    history = get_id(str(id), range="Legs!A:Y")
+    entry_base = history[0]
+    entry_history = []
+    entry_update(history=history, entry_base=entry_base, entry_history=entry_history)
+    return render_template('legislation.html', entry_base=entry_base, entry_history=entry_history)
+
+@bp.route('/regs/<id>')
+def regs(id):
+    history = get_id(str(id), range="Regs!A:Y")
+    entry_base = history[0]
+    entry_history = []
+    entry_update(history=history, entry_base=entry_base, entry_history=entry_history)
+    enforcement_date = datetime.date(int(entry_base["enforcement_year"]),
+                                     list(calendar.month_name).index(entry_base["enforcement_month"]), 1)
+    enforcement = {"date": enforcement_date, "now":datetime.date.today()}
+    return render_template('regulation.html', entry_base=entry_base, entry_history=entry_history, enforcement=enforcement)
+
+@bp.route('/consultation/<id>')
+def consultation(id):
+    history = get_id(str(id), range="Consultations!A:Y")
+    entry_base = history[0]
+    entry_history = []
+    closed = False
+    entry_update(history=history, entry_base=entry_base, entry_history=entry_history)
+    for x in entry_history:
+        if x["step"] == "Closed":
+            closed = True
+    return render_template('consultation.html', entry_base=entry_base, entry_history=entry_history, closed=closed)
 
 """@bp.route('/create_report/<id>')
 def create_report(id):
