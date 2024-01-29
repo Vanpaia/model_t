@@ -2,7 +2,7 @@ import datetime
 import calendar
 from flask import render_template, url_for, redirect, jsonify, request
 #from flask_weasyprint import HTML
-from gsheet import authentication, get_row, get_all, get_id, entry_update
+from gsheet import authentication, get_row, get_all, get_new, get_id, entry_update
 from app.main import bp
 import app
 
@@ -10,7 +10,10 @@ import app
 @bp.route('/')
 @bp.route('/index')
 def index():
-    return render_template('index.html')
+    legs = get_new(range="Legs!A:Y")
+    regs = get_new(range="Regs!A:Y")
+    consultation = get_new(range="Consultations!A:Y")
+    return render_template('index.html', legs=legs, regs=regs, consultation=consultation)
 
 @bp.route('/legs/<id>')
 def legs(id):

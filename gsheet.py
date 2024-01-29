@@ -52,6 +52,23 @@ def get_all():
     except HttpError as err:
         print(err)
 
+def get_new(range=RANGE):
+    creds = authentication()
+    try:
+        service = build("sheets", "v4", credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = (sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=range).execute())
+        values = result.get("values", [])
+        df = pd.DataFrame(values[1:], columns=values[0])
+        filtered_df = df.loc[df['nature'].str.contains("New")]
+        changed = filtered_df.to_json(orient="records")
+        parsed = loads(changed)
+        return parsed
+    except HttpError as err:
+        print(err)
+
 def get_row(search):
     creds = authentication()
     try:
