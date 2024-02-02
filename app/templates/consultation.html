@@ -7,15 +7,18 @@
 {% endblock %}
 
 {% block app_content %}
-    <h1>{{ entry_base["initiative_type"] }} in {{ entry_base["country"] }}</h1>
-    <h2><b>{{ entry_base["title"] }}</b></h2>
-    <h2><b>{{ entry_base["native_title"] }}</b></h2>
+<ul class="blokken">
+    <h1 class="headerpaars" >{{ entry_base["initiative_type"] }} in {{ entry_base["country"] }}</h1>
+    <h3><b>{{ entry_base["title"] }}</b></h3>
+    <h9><b>{{ entry_base["native_title"] }}</b></h9>
     <p><i>Date of introduction: {{ entry_base["date_first_introduction"] }}</i></p>
+    </ul>
+<ul class="blokken">
     <div class="line_box" style="margin: 40px 0 40px 0;">
         {% if closed is true %}
             <div class="text_circle done">
                 <div class="circle">
-                    <h4>Consultation Opened</h4>
+                    <h5>Consultation Opened</h5>
                     <p>{{ entry_base["date_first_introduction"] }}</p>
                 </div>
                 <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
@@ -24,7 +27,7 @@
                 {% if steps["step"] == 'Closed' %}
                     <div class="text_circle done">
                         <div class="circle">
-                            <h4>Consultation Closed</h4>
+                            <h5>Consultation Closed</h5>
                             <p>{{ steps["date"] }}</p>
                         </div>
                         <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
@@ -42,13 +45,15 @@
             </div>
             <div class="text_circle">
                 <div class="circle">
-                    <h4>Consultation Closed</h4>
+                    <h5>Consultation Closed</h5>
                 </div>
                 <a href="javascript:void(0)" class="tvar"></a>
             </div>
         {% endif %}
     </div>
-    <h3>Content:</h3>
+    </ul>
+<ul class="blokken">
+    <h4>Content:</h4>
     <p>{{ entry_base["description"] }}</p>
 
 {% endblock %}

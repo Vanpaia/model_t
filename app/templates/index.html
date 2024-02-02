@@ -7,31 +7,40 @@
 {% endblock %}
 
 {% block app_content %}
-    <h1>Welcome User</h1>
+    <h1 class="headersimon">Welcome  Client X</h1>
 
-    <h2>Latest Policy Developments</h2>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
-    </p>
-
-    <h2>Latest Policy Addition</h2>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
-    </p>
-    <h1> All Legislation</h1>
-    <ul>
+   <ul class="blokken">
+       <h2>Latest Policy Developments</h2>
     {% for x in legs %}
         <li><a href="{{ url_for('main.legs', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}
     </ul>
-    <h1> All Regulation</h1>
-    <ul>
+
+
+    <ul class="blokken">
+        <h2>Latest Policy Addition</h2>
     {% for x in regs %}
         <li><a href="{{ url_for('main.regs', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}
     </ul>
-    <h1> All Consultations</h1>
-    <ul>
+
+
+    <ul class="blokken">
+        <h2> All Legislation</h2>
+    {% for x in legs %}
+        <li><a href="{{ url_for('main.legs', id=x.internal_id) }}">{{ x.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <ul class="blokken">
+        <h2> All Regulation</h2>
+    {% for x in regs %}
+        <li><a href="{{ url_for('main.regs', id=x.internal_id) }}">{{ x.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <ul class="blokken">
+        <h2> All Consultations</h2>
     {% for x in consultation %}
         <li><a href="{{ url_for('main.consultation', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}

@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
 {% block styles %}
-{{super()}}
-<link rel="stylesheet"
-      href="{{url_for('static', filename='main.css')}}">
+    {{super()}}
+    <link rel="stylesheet"
+          href="{{url_for('static', filename='main.css')}}">
 {% endblock %}
 
 {% block app_content %}
-    <h1>{{ entry_base["initiative_type"] }} in {{ entry_base["country"] }}</h1>
-    <h2><b>{{ entry_base["title"] }}</b></h2>
-    <h2><b>{{ entry_base["native_title"] }}</b></h2>
-    <p><i>Date of introduction: {{ entry_base["date_first_introduction"] }}</i></p>
+    <ul class="blokken">
+        <h1 class="headerpaars">{{ entry_base["initiative_type"] }} in {{ entry_base["country"] }}</h1>
+        <h3><b>{{ entry_base["title"] }}</b></h3>
+        <h9><b>{{ entry_base["native_title"] }}</b></h9>
+        <p><i>Date of introduction: {{ entry_base["date_first_introduction"] }}</i></p>
+        <h4>Content:</h4>
+        <p>{{ entry_base["description"] }}</p>
+    </ul>
     <div class="line_box" style="margin: 40px 0 40px 0;">
         {% for steps in entry_history %}
             <div class="text_circle done">
                 <div class="circle">
-                    <h4>{{ steps["step"] }}</h4>
+                    <h5>{{ steps["step"] }}</h5>
                     <p>{{ steps["date"] }}</p>
                 </div>
                 <a href="javascript:void(0)" class="tvar"><span data-toggle="popover" title="Sample text" data-trigger="hover" data-placement="top" data-content="Ukázkový text při hover"></span></a>
@@ -24,24 +28,25 @@
         {% for steps in range(5-entry_history|length) %}
             <div class="text_circle">
                 <div class="circle">
-                    <h4>Remaining Step</h4>
+                    <h5>Remaining Step</h5>
                     <p>Unknown</p>
                 </div>
                 <a href="javascript:void(0)" class="tvar"></a>
             </div>
         {% endfor %}
     </div>
-    <h3>Content:</h3>
-    <p>{{ entry_base["description"] }}</p>
-    <h3>Likelihood: {{ entry_base["likelihood"] }}</h3>
-    {% for development in entry_history %}
-        <i>{{ development["date"] }}</i>
-        <p class="feed">{{ development["development"] }}</p>
-    {% endfor %}
-    <h3>Impact: {{ entry_base["impact_score"] }}</h3>
-    <p>{{ entry_base["impact"] }}</p>
-    <p><a href="{{ entry_base["relevant_links"] }}">Source Link</a></p>
-
+    <ul class="blokken">
+        <h4>Likelihood: {{ entry_base["likelihood"] }}</h4>
+        {% for development in entry_history %}
+            <i>{{ development["date"] }}</i>
+            <p class="feed">{{ development["development"] }}</p>
+        {% endfor %}
+    </ul>
+    <ul class="blokken">
+        <h4>Impact: {{ entry_base["impact_score"] }}</h4>
+        <p>{{ entry_base["impact"] }}</p>
+    </ul>
+    <h10><a href="{{ entry_base["relevant_links"] }}">Source Link</a></h10>
 {% endblock %}
 
 {% block scripts %}

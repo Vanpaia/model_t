@@ -1,186 +1,280 @@
-body {
-    font-family: 'Source Sans Pro', Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+
+/* Existing styles with modifications for a purple navigation bar */
+
+/* Add the imports and existing definitions here for simplicity */
+
+/* Navigation Bar Styles Override with Deep Purple */
+.navbar {
+    background-color: #442447; /* Deep Purple for navbar background */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Adding shadow for depth */
 }
 
-.navbar navbar-expand-lg navbar-light bg-light {
-    padding: 20px 15px;
-    text-align: center;
-    background: #35203b;
-    font-size: 22px;
 }
-.collapse navbar-collapse ul {
-    list-style: none;
+
+.nav-link:hover, .navbar-brand:hover {
+    background-color: #362037 !important; /* Darker shade of purple for hover */
+    color: #fff !important;
+}
+
+/* Modify dropdown menu styling for Deep Purple Theme */
+.navbar .dropdown-menu {
+    background-color: #442447; /* Keeping consistent with the navbar */
+    border: none; /* Removing default border */
+}
+
+.navbar .dropdown-item {
+    color: #fff; /* White text for dropdown items */
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #362037; /* Changing background on hover to a darker shade of purple */
+    color: #fff;
+}
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+/* Base and Layout Styles */
+body,html {
+    font-family: 'Source Sans Pro', sans-serif;
     padding: 0;
     margin: 0;
+    background-color: #f5f5f5;
+    color: #00000; /* Deep Purple */
+    height: 100%;
 }
-.collapse navbar-collapse ul li {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #564066;
-    cursor: pointer;
-}
-.collapse navbar-collapse ul li:hover, .sidebar ul li.active {
-    background-color: #563d67;
-}
-#main-content {
-    margin-left: 250px;
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #ffff; /* Adding white background for contrast */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Adding shadow for depth */
 }
-h2 {
-    text-align: center;
-    color: #087d85;
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 30px;
+.blokken {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: auto;
+    }
+.headersimon {
+    background-color: #05595b; /* Slightly darker shade of teal for shadings around H2 */
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Adding shadow to H2 for emphasis */
+}
+.headerpaars {
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 10px;
+    background-color: #442447; /* Slightly darker shade of teal for shadings around H2 */
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Adding shadow to H2 for emphasis */
+}
+/* Responsive Side Navigation Bar Styles */
+.sidebar {
+    height: 100%;
+    width: 250px; /* Adjusted width for visibility */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #077d85; /* Medium Teal */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.1); /* Side Shadow */
 }
 
-h1 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #087d85;
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
 }
+
+.sidebar a:hover, .sidebar a:focus {
+    color: #fff; /* Keep white color for hover effects */
+    background-color: #05595b; /* Slightly darker shade of teal for hover */
+}
+
+/* Content Styling */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #442447;
+}
+H1 {
+margin: 20px;
+}
+
+h3 {
+    font-weight: normal;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #05595b; /* Slightly darker shade of teal for shadings around H2 */
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Adding shadow to H2 for emphasis */
+}
+h9 {
+font-weight: normal;
+font-style: italic;
+font-size: 20px;
+}
+h10 {
+    margin-left: 20px;
+    font-weight: normal;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF; /* Slightly darker shade of teal for shadings around H2 */
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Adding shadow to H2 for emphasis */
+    font-size:14px;
+    font-color:#FFFFFF;
+}
+
 p {
     font-size: 16px;
-    color: #666;
-}
-
-.feed p {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-    padding: 20px;
+    line-height: 1.6;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
-.home-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #442547;
-    color: #fff;
-    border: none;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-}
-.home-button:hover {
-    background-color: #563d67;
+
+a {
+    color: #077d85; /* Teal link color */
 }
 
+a:hover {
+    color: #05595b; /* Slightly darker shade of teal for hover effects */
+}
 .line_box {
-     display: flex;
-     margin-bottom: 40px;
+    display: flex;
+    margin-bottom: 40px;
 }
- .text_circle {
-     flex: 1;
-     text-align: center;
-     position: relative;
+.text_circle {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 3;
 }
- .text_circle:after {
-     background-color: grey;
-     bottom: 1.25em;
-     content: "";
-     display: block;
-     height: 3px;
-     position: absolute;
-     right: 0;
-     width: 50%;
-     z-index: -1;
+.text_circle:after {
+    background-color: grey;
+    bottom: 0em;
+    content: "";
+    display: flex;
+    height: 3px;
+    position: absolute;
+    right: -5px;
+    width: 50%;
+    z-index:-1;
 }
- .stav_projektu .text_circle:after,.stav_projektu .text_circle:before {background-color: grey;}
- .line_box h4 {
-     color: #189599;
-     font-weight: bold;
+.stav_projektu .text_circle:after,.stav_projektu .text_circle:before {
+    background-color: grey;
 }
- .line_box h4,.line_box p {
-     font-size: 12px;
-     margin-bottom: 0;
-     padding: 0 5px;
+.line_box h5 {
+    color: #077d85;
+    font-weight: bold;
 }
- .subline {
-     position: absolute;
-     right: -25px;
-     bottom: -43%;
+.line_box h5,.line_box p {
+    font-size: 12px;
+    margin-bottom: 0;
+    padding: 0 5px;
 }
- .subline:before {
-     content: "";
-     position: absolute;
-     height: 15px;
-     width: 15px;
-     bottom: 14px;
-     right: 15px;
-     background-color: #189599;
-     border-radius: 50%;
-     top: -25px;
+.subline {
+    position: absolute;
+    right: -25px;
+    bottom: -43%;
 }
- .subline h6 {margin-bottom: 0;}
- .timeline {margin: 40px 0;}
- .text_circle.done:after,.text_circle.done + .text_circle:before,.stav_projektu .text_circle.done:after,.stav_projektu .text_circle.done + .text_circle:before {background-color: #189599;}
- .text_circle.sub:after {background-color: #189599;}
- .text_circle:not(:first-child):before {
-     bottom: 1.25em;
-     content: "";
-     display: block;
-     height: 3px;
-     position: absolute;
-     left: 0;
-     width: 50%;
-     z-index: -1;
-     background-color: grey;
+.subline:before {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    bottom: 14px;
+    right: 15px;
+    background-color: #077d85;
+    border-radius: 50%;
+    top: -25px;
 }
- .stav_projektu .text_circle:not(:first-child):before {background-color: grey;}
- .text_circle:last-child:after {width: 0;}
- .circle {height: 100%;}
- .tvar {
-     height: 40px;
-     width: 40px;
-     border: 2px solid #189599;
-     display: flex;
-     position: relative;
-     border-radius: 100%;
-     top: -43px;
-     margin: 3px auto;
-     background-color: #fff;
+.subline h6 {
+    margin-bottom: 0;
 }
- .tvar span {
-     margin: 25% auto;
-     height: 20px;
-     width: 20px;
-     background-color: #189599;
-     border-radius: 100%;
-     color: #fff;
+.timeline {
+    margin: 40px 0;
 }
- .stav_projektu .tvar {border: 2px solid grey;}
- .stav_projektu .done .tvar,.stav_projektu .sub .tvar {border: 2px solid #189599;}
- .subline h6 {color: #189599;}
- .timeline .card-header:hover {
-     background-color: #ececec;
-     cursor: pointer;
+.text_circle.done:after,.text_circle.done + .text_circle:before,.stav_projektu .text_circle.done:after,.stav_projektu .text_circle.done + .text_circle:before {
+    background-color: #077d85;
 }
-/* iPhone X ----------------------------------- */
- @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
-    .subline:before {top: -43px;}
+.text_circle.sub:after {
+    background-color: #077d85;
 }
- @media only screen and (device-width : 812px) and (device-height : 375px) and (orientation : landscape) and (-webkit-device-pixel-ratio : 3) {
-    .subline:before {top: -31px;}
+.text_circle:not(:first-child):before {
+    bottom: 0em;
+    content: "";
+    display: block;
+    height: 3px;
+    position: absolute;
+    left: 1px;
+    width: 50%;
+    z-index: 0;
+    background-color: grey;
 }
-/* iPad portrait ----------------------------------- */
- @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    .subline:before {top: -29px;}
+.stav_projektu .text_circle:not(:first-child):before {
+    background-color: grey;
 }
-/* mobile width till 767px ----------------------------------- */
- @media (max-width: 767px){
-    .subline:before {top: -30px;}
+.text_circle:last-child:after {
+    width: 0;
 }
-/* Portrait iPad Pro */
- @media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
-    .subline:before {top: -23px;}
+.circle {
+    height: 100%;
 }
-/* mobile width till 480px ----------------------------------- */
- @media (max-width: 480px){
-    .subline:before {top: -43px;}
+.tvar {
+    height: 40px;
+    width: 40px;
+    border: 2px solid #077d85;
+    display: flex;
+    position: relative;
+    border-radius: 100%;
+    top: -43px;
+    margin: 3px auto;
+    background-color: #fff;
+}
+.tvar span {
+    margin: 25% auto;
+    height: 20px;
+    width: 20px;
+    background-color: #077d85;
+    border-radius: 100%;
+    color: #fff;
+}
+.stav_projektu .tvar {
+    border: 2px solid grey;
+}
+.stav_projektu .done .tvar,.stav_projektu .sub .tvar {
+    border: 2px solid #077d85;
+}
+.subline h6 {
+    color: #077d85;
+}
+.timeline .card-header:hover {
+    background-color: #ececec;
+    cursor: pointer;
 }
