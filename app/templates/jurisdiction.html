@@ -7,10 +7,15 @@
 {% endblock %}
 
 {% block app_content %}
-    <h1 class="headersimon">Welcome  Client X</h1>
+    <h1 class="headersimon">{{ information["name"] }}</h1>
+
+    <ul class="blokken">
+        <h2> Context </h2>
+        <p>{{ information["name"] }} is a jurisdiction in {{ information["region"] }} and has a {{ information["parliament"] }} parliamentary system.</p>
+    </ul>
 
    <ul class="blokken">
-       <h2>Latest Policy Developments</h2>
+       <h2>Latest Policy Developments in {{ information["name"] }}</h2>
         {% for x in latest_development %}
             {% if x.initiative_type == "Legislative Process" %}
                 <li>Legislative development in {{ x.country }}: <a href="{{ url_for('main.legs', id=x.internal_id) }}">{{ x.title }}</a></li>
@@ -26,7 +31,7 @@
 
 
     <ul class="blokken">
-        <h2>Latest Policy Addition</h2>
+        <h2>Latest Policy Addition in {{ information["name"] }}</h2>
         {% for x in latest_addition %}
             {% if x.initiative_type == "Legislative Process" %}
                 <li>New Legislation in {{ x.country }}: <a href="{{ url_for('main.legs', id=x.internal_id) }}">{{ x.title }}</a></li>
@@ -43,21 +48,21 @@
 
 
     <ul class="blokken">
-        <h2> All Legislation</h2>
+        <h2> All Legislation in {{ information["name"] }}</h2>
     {% for x in legs %}
         <li><a href="{{ url_for('main.legs', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}
     </ul>
 
     <ul class="blokken">
-        <h2> All Regulation</h2>
+        <h2> All Regulation in {{ information["name"] }}</h2>
     {% for x in regs %}
         <li><a href="{{ url_for('main.regs', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}
     </ul>
 
     <ul class="blokken">
-        <h2> All Consultations</h2>
+        <h2> All Consultations in {{ information["name"] }}</h2>
     {% for x in consultation %}
         <li><a href="{{ url_for('main.consultation', id=x.internal_id) }}">{{ x.title }}</a></li>
     {% endfor %}

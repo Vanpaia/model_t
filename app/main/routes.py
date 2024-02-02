@@ -1,8 +1,9 @@
 import datetime
 import calendar
+from json import loads
 from flask import render_template, url_for, redirect, jsonify, request
 #from flask_weasyprint import HTML
-from gsheet import authentication, get_row, get_all, get_new, get_id, entry_update
+from gsheet import authentication, get_row, get_all, get_new, get_id, entry_update, get_country
 from app.main import bp
 import app
 
@@ -10,10 +11,18 @@ import app
 @bp.route('/')
 @bp.route('/index')
 def index():
+    all = get_all()
     legs = get_new(range="Legs!A:Y")
     regs = get_new(range="Regs!A:Y")
     consultation = get_new(range="Consultations!A:Y")
-    return render_template('index.html', legs=legs, regs=regs, consultation=consultation)
+    latest_addition = loads(all.loc[all['nature'].str.contains("New")].sort_values("date_entry").iloc[:5].to_json(orient="records"))
+    latest_development = loads(all.loc[all['nature'].str.contains("Update")].sort_values("date_entry").iloc[:5].to_json(orient="records"))
+    for x in latest_development:
+        main = all.loc[all['internal_id'].str.contains(x['internal_id'])].loc[all['nature'].str.contains('New')]
+        x["country"] = main.iloc[0]['country']
+        x["title"] = main.iloc[0]['title']
+        x["initiative_type"] = main.iloc[0]['initiative_type']
+    return render_template('index.html', legs=legs, regs=regs, consultation=consultation, latest_addition=latest_addition, latest_development=latest_development)
 
 @bp.route('/legs/<id>')
 def legs(id):
@@ -45,6 +54,25 @@ def consultation(id):
         if x["step"] == "Closed":
             closed = True
     return render_template('consultation.html', entry_base=entry_base, entry_history=entry_history, closed=closed)
+
+@bp.route('/jurisdiction/<country>')
+def jurisdiction(country):
+    information = get_country(str(country))
+    data = get_all()
+    all = data.loc[data['country'].str.contains(country)]
+    legs = loads(all.loc[all['nature'].str.contains("New")].loc[all['initiative_type'].str.contains("Legislative Process")].to_json(orient="records"))
+    regs = loads(all.loc[all['nature'].str.contains("New")].loc[all['initiative_type'].str.contains("Regulatory Process")].to_json(orient="records"))
+    consultation = loads(all.loc[all['nature'].str.contains("New")].loc[all['initiative_type'].str.contains("Public Consultation/Hearing")].to_json(orient="records"))
+    latest_addition = loads(all.loc[all['nature'].str.contains("New")].sort_values("date_entry").iloc[:5].to_json(orient="records"))
+    latest_development = loads(all.loc[all['nature'].str.contains("Update")].sort_values("date_entry").iloc[:5].to_json(orient="records"))
+    for x in latest_development:
+        main = all.loc[all['internal_id'].str.contains(x['internal_id'])].loc[all['nature'].str.contains('New')]
+        x["country"] = main.iloc[0]['country']
+        x["title"] = main.iloc[0]['title']
+        x["initiative_type"] = main.iloc[0]['initiative_type']
+
+    return render_template('jurisdiction.html', information=information[0], legs=legs, regs=regs, consulation=consultation, latest_addition=latest_addition, latest_development=latest_development)
+
 
 """@bp.route('/create_report/<id>')
 def create_report(id):

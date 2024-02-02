@@ -24,9 +24,11 @@
                     Artificial Intelligence
                     </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">The Netherlands</a>
-                    <a class="dropdown-item" href="#">Germany</a>
-                    <a class="dropdown-item" href="#">Brazil</a>
+                    <a class="dropdown-item" href="{{ url_for('main.jurisdiction', country="Austria") }}">Austria</a>
+                    <a class="dropdown-item" href="{{ url_for('main.jurisdiction', country="European Union") }}">European Union</a>
+                    <a class="dropdown-item" href="{{ url_for('main.jurisdiction', country="Germany") }}">Germany</a>
+                    <a class="dropdown-item" href="{{ url_for('main.jurisdiction', country="Spain") }}">Spain</a>
+                    <a class="dropdown-item" href="{{ url_for('main.jurisdiction', country="Switzerland") }}">Switzerland</a>
                 </div>
                 </li>
                 <li class="nav-item dropdown">

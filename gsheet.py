@@ -47,8 +47,7 @@ def get_all():
         result = (sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute())
         values = result.get("values", [])
         df = pd.DataFrame(values[1:], columns=values[0])
-        print(values)
-        print(df)
+        return df
     except HttpError as err:
         print(err)
 
@@ -144,3 +143,20 @@ def entry_update(history, entry_base, entry_history):
             entry_base["relevant_links"] = x["relevant_links"]
         if x["date_first_introduction"] is not None:
             entry_base["date_first_introduction"] = x["date_first_introduction"]
+
+def get_country(country, range="Jurisdictions!A1:C"):
+    creds = authentication()
+    try:
+        service = build("sheets", "v4", credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+        result = (sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=range).execute())
+        values = result.get("values", [])
+        df = pd.DataFrame(values[1:], columns=values[0])
+        filtered_df = df.loc[df['name'].str.contains(country)]
+        changed = filtered_df.to_json(orient="records")
+        parsed = loads(changed)
+        return parsed
+    except HttpError as err:
+        print(err)
